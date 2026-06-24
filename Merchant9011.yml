@@ -2,6 +2,8 @@
   port: 9011
 
 spring:
+  application:
+    name: merchant-service
   datasource:
     url: jdbc:mysql://localhost:3306/elm_second?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
     username: root
