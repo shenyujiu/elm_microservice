@@ -2,8 +2,6 @@
   port: 9020
 
 spring:
-  application:
-    name: cart-service
   datasource:
     url: jdbc:mysql://localhost:3306/elm_second?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
     username: root
@@ -12,6 +10,8 @@ spring:
   sql:
     init:
       mode: never
+  application:
+    name: cart-service
 
 mybatis:
   mapper-locations: classpath*:mapper/**/*.xml
