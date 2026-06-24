@@ -1,0 +1,44 @@
+﻿server:
+  port: 9000
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/elm_second?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.eleme.user,com.eleme.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh,busrefresh
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      default:
+        # 配置断路器OPEN状态的失败率阈值为30%
+        failure-rate-threshold: 30
+        # 配置滑动窗口类型为时间窗口型（TIME_BASED）
+        sliding-window-type: TIME_BASED
+        # 配置滑动窗口长度为10秒
+        sliding-window-size: 10
+        # 配置滑动窗口内最小请求个数为5
+        minimum-number-of-calls: 5
+        # 配置断路器从OPEN状态变为HALF_OPEN状态的等待时间为5秒
+        wait-duration-in-open-state: 5s
+        # 配置断路器HALF_OPEN状态时允许测试响应能力的请求数为3
+        permitted-number-of-calls-in-half-open-state: 3
+        # 记录所有异常
+        record-exceptions:
+          - java.lang.Exception
