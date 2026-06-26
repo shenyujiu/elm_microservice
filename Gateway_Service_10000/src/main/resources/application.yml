@@ -1,0 +1,101 @@
+﻿server:
+  port: 10000
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        wait-duration-in-open-state:
+          seconds: 5
+        failure-rate-threshold: 10
+        minimum-number-of-calls: 1
+        permitted-number-of-calls-in-half-open-state: 2
+        automatic-transition-from-open-to-half-open-enabled: true
+    instances:
+      userBreaker:
+        base-config: default
+      merchantBreaker:
+        base-config: default
+      cartBreaker:
+        base-config: default
+      orderBreaker:
+        base-config: default
+      paymentBreaker:
+        base-config: default
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user
+              uri: lb://user-service
+              predicates:
+                - Path=/api/users/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: userBreaker
+                    fallbackUri: forward:/fallback/user
+            - id: category
+              uri: lb://merchant-service
+              predicates:
+                - Path=/api/categories/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: merchantBreaker
+                    fallbackUri: forward:/fallback/merchant
+            - id: merchant
+              uri: lb://merchant-service
+              predicates:
+                - Path=/api/merchants/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: merchantBreaker
+                    fallbackUri: forward:/fallback/merchant
+            - id: cart
+              uri: lb://cart-service
+              predicates:
+                - Path=/api/carts/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: cartBreaker
+                    fallbackUri: forward:/fallback/cart
+            - id: order
+              uri: lb://order-service
+              predicates:
+                - Path=/api/orders/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: orderBreaker
+                    fallbackUri: forward:/fallback/order
+            - id: payment
+              uri: lb://payment-service
+              predicates:
+                - Path=/api/payments/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: paymentBreaker
+                    fallbackUri: forward:/fallback/payment
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: "${spring.cloud.client.ip-address}:${server.port}"
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 15
+  client:
+    service-url:
+      defaultZone: http://eurekaService13000:13000/eureka,http://eurekaService13001:13001/eureka,http://eurekaService13002:13002/eureka
+
+gateway:
+  auth:
+    enabled: true

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Merchant_Service_9011" />
+        <module name="Entity" />
+        <module name="Eureka_Server_8762" />
+        <module name="Eureka_Server_8761" />
+        <module name="Eureka_Server_8763" />
+        <module name="Cart_Service_9020" />
+        <module name="Cart_Service_9021" />
+        <module name="Order_Service_9031" />
+        <module name="Gateway_Service_10000" />
+        <module name="Merchant_Service_9010" />
+        <module name="Order_Service_9030" />
+        <module name="User_Service_9001" />
+        <module name="User_Service_9000" />
+        <module name="Config_Service_8888" />
+        <module name="Payment_Service_9040" />
+        <module name="Payment_Service_9041" />
+        <module name="Config_Service_8889" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Cart_Service_9022" target="24" />
+      <module name="config-service" target="24" />
+      <module name="eleme-cart-service" target="24" />
+      <module name="eleme-merchant-service" target="24" />
+      <module name="eleme-merchant-service (1)" target="24" />
+      <module name="eleme-merchant-service (3)" target="24" />
+      <module name="eleme-order-service" target="24" />
+      <module name="eleme-order-service (1)" target="24" />
+      <module name="eleme-order-service (2)" target="24" />
+      <module name="eleme-order-service (3)" target="24" />
+      <module name="eleme-payment-service" target="24" />
+      <module name="eleme-payment-service (1)" target="24" />
+      <module name="eleme-payment-service (2)" target="24" />
+      <module name="eleme-payment-service (3)" target="24" />
+      <module name="eleme-user-service" target="24" />
+      <module name="eleme-user-service (1)" target="24" />
+      <module name="eleme-user-service (2)" target="24" />
+      <module name="eleme-user-service (3)" target="24" />
+      <module name="Eureka_Service_13000" target="24" />
+      <module name="Eureka_Service_13001" target="24" />
+      <module name="Eureka_Service_13002" target="24" />
+      <module name="Merchant_Service_9012" target="24" />
+      <module name="Order_Service_9032" target="24" />
+      <module name="Payment_Service_9042" target="24" />
+      <module name="User_Service_9002" target="24" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Cart_Service_9020" options="-parameters" />
+      <module name="Cart_Service_9021" options="-parameters" />
+      <module name="Cart_Service_9022" options="-parameters -parameters" />
+      <module name="Config_Service_8888" options="-parameters" />
+      <module name="Config_Service_8889" options="-parameters" />
+      <module name="Entity" options="-parameters" />
+      <module name="Eureka_Server_8761" options="-parameters" />
+      <module name="Eureka_Server_8762" options="-parameters" />
+      <module name="Eureka_Server_8763" options="-parameters" />
+      <module name="Eureka_Service_13000" options="-parameters" />
+      <module name="Eureka_Service_13001" options="-parameters" />
+      <module name="Eureka_Service_13002" options="-parameters" />
+      <module name="Gateway_Service_10000" options="-parameters" />
+      <module name="Merchant_Service_9010" options="-parameters" />
+      <module name="Merchant_Service_9011" options="-parameters" />
+      <module name="Merchant_Service_9012" options="-parameters -parameters" />
+      <module name="Order_Service_9030" options="-parameters" />
+      <module name="Order_Service_9031" options="-parameters" />
+      <module name="Order_Service_9032" options="-parameters -parameters" />
+      <module name="Payment_Service_9040" options="-parameters" />
+      <module name="Payment_Service_9041" options="-parameters" />
+      <module name="Payment_Service_9042" options="-parameters -parameters" />
+      <module name="User_Service_9000" options="-parameters" />
+      <module name="User_Service_9001" options="-parameters" />
+      <module name="User_Service_9002" options="-parameters -parameters" />
+      <module name="config-service" options="-parameters -parameters" />
+      <module name="eleme-cart-service" options="-parameters -parameters" />
+      <module name="eleme-merchant-service" options="-parameters -parameters" />
+      <module name="eleme-merchant-service (1)" options="-parameters -parameters" />
+      <module name="eleme-merchant-service (3)" options="-parameters -parameters" />
+      <module name="eleme-order-service" options="-parameters -parameters" />
+      <module name="eleme-order-service (1)" options="-parameters -parameters" />
+      <module name="eleme-order-service (2)" options="-parameters -parameters" />
+      <module name="eleme-order-service (3)" options="-parameters -parameters" />
+      <module name="eleme-payment-service" options="-parameters -parameters" />
+      <module name="eleme-payment-service (1)" options="-parameters -parameters" />
+      <module name="eleme-payment-service (2)" options="-parameters -parameters" />
+      <module name="eleme-payment-service (3)" options="-parameters -parameters" />
+      <module name="eleme-user-service" options="-parameters -parameters" />
+      <module name="eleme-user-service (1)" options="-parameters -parameters" />
+      <module name="eleme-user-service (2)" options="-parameters -parameters" />
+      <module name="eleme-user-service (3)" options="-parameters -parameters" />
+      <module name="elm-backend" options="-parameters" />
+    </option>
+  </component>
+</project>

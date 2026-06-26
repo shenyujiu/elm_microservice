@@ -1,0 +1,7 @@
+com\eleme\order\mapper\OrderItemMapper.class
+com\eleme\order\mapper\OrderInfoMapper.class
+com\eleme\order\OrderServiceApplication.class
+com\eleme\order\model\OrderItemDO.class
+com\eleme\order\service\OrderService.class
+com\eleme\order\model\OrderInfoDO.class
+com\eleme\order\controller\OrderController.class

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eleme.user.mapper.UserDefaultAddressMapper">
+
+    <insert id="upsertDefault">
+        INSERT INTO user_default_address (user_id, address_id)
+        VALUES (#{userId}, #{addressId})
+        ON DUPLICATE KEY UPDATE address_id = VALUES(address_id)
+    </insert>
+
+    <delete id="deleteByUserId">
+        DELETE FROM user_default_address
+        WHERE user_id = #{userId}
+    </delete>
+</mapper>

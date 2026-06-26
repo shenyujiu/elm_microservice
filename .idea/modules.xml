@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/config-service/config-service.iml" filepath="$PROJECT_DIR$/config-service/config-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eleme-cart-service/eleme-cart-service.iml" filepath="$PROJECT_DIR$/eleme-cart-service/eleme-cart-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eleme-merchant-service/eleme-merchant-service.iml" filepath="$PROJECT_DIR$/eleme-merchant-service/eleme-merchant-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eleme-order-service/eleme-order-service.iml" filepath="$PROJECT_DIR$/eleme-order-service/eleme-order-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eleme-payment-service/eleme-payment-service.iml" filepath="$PROJECT_DIR$/eleme-payment-service/eleme-payment-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eleme-user-service/eleme-user-service.iml" filepath="$PROJECT_DIR$/eleme-user-service/eleme-user-service.iml" />
+    </modules>
+  </component>
+</project>

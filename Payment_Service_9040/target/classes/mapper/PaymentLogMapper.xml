@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eleme.payment.mapper.PaymentLogMapper">
+
+    <resultMap id="PaymentLogResultMap" type="com.eleme.payment.model.PaymentLogDO">
+        <id property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="payChannel" column="pay_channel"/>
+        <result property="payStatus" column="pay_status"/>
+        <result property="transactionNo" column="transaction_no"/>
+        <result property="amount" column="amount"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="callbackAt" column="callback_at"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.eleme.payment.model.PaymentLogDO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO payment_log (order_id, order_no, pay_channel, pay_status, transaction_no, amount)
+        VALUES (#{orderId}, #{orderNo}, #{payChannel}, #{payStatus}, #{transactionNo}, #{amount})
+    </insert>
+
+    <select id="selectByOrderId" resultMap="PaymentLogResultMap">
+        SELECT id, order_id, order_no, pay_channel, pay_status, transaction_no, amount, created_at, callback_at
+        FROM payment_log
+        WHERE order_id = #{orderId}
+        LIMIT 1
+    </select>
+
+    <update id="updateStatus">
+        UPDATE payment_log
+        SET pay_status = #{payStatus}, transaction_no = #{transactionNo}, callback_at = #{callbackAt}
+        WHERE order_id = #{orderId}
+    </update>
+</mapper>

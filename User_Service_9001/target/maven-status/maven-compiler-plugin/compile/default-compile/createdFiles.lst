@@ -1,0 +1,10 @@
+com\eleme\user\mapper\UserTokenMapper.class
+com\eleme\user\model\UserDO.class
+com\eleme\user\controller\UserController.class
+com\eleme\user\mapper\AddressMapper.class
+com\eleme\user\service\UserService.class
+com\eleme\user\mapper\UserMapper.class
+com\eleme\user\model\UserTokenDO.class
+com\eleme\user\UserServiceApplication.class
+com\eleme\user\mapper\UserDefaultAddressMapper.class
+com\eleme\user\model\AddressDO.class

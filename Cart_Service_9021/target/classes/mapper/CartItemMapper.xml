@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eleme.cart.mapper.CartItemMapper">
+
+    <resultMap id="CartItemResultMap" type="com.eleme.cart.model.CartItemDO">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="foodId" column="food_id"/>
+        <result property="foodName" column="food_name"/>
+        <result property="foodPrice" column="food_price"/>
+        <result property="foodImageUrl" column="food_image_url"/>
+        <result property="quantity" column="quantity"/>
+        <result property="checked" column="checked"/>
+    </resultMap>
+
+    <select id="selectByMerchant" resultMap="CartItemResultMap">
+        SELECT c.cartId AS id,
+               CAST(c.userId AS UNSIGNED) AS user_id,
+               c.businessId AS merchant_id,
+               c.foodId AS food_id,
+               f.foodName AS food_name,
+               f.foodPrice AS food_price,
+               f.foodImg AS food_image_url,
+               c.quantity AS quantity,
+               1 AS checked
+        FROM cart c
+        JOIN food f ON f.foodId = c.foodId
+        WHERE c.userId = CAST(#{userId} AS CHAR) AND c.businessId = #{merchantId}
+        ORDER BY c.cartId ASC
+    </select>
+
+    <select id="selectByUniqueKey" resultMap="CartItemResultMap">
+        SELECT c.cartId AS id,
+               CAST(c.userId AS UNSIGNED) AS user_id,
+               c.businessId AS merchant_id,
+               c.foodId AS food_id,
+               f.foodName AS food_name,
+               f.foodPrice AS food_price,
+               f.foodImg AS food_image_url,
+               c.quantity AS quantity,
+               1 AS checked
+        FROM cart c
+        JOIN food f ON f.foodId = c.foodId
+        WHERE c.userId = CAST(#{userId} AS CHAR) AND c.businessId = #{merchantId} AND c.foodId = #{foodId}
+        LIMIT 1
+    </select>
+
+    <select id="selectByIdAndUserId" resultMap="CartItemResultMap">
+        SELECT c.cartId AS id,
+               CAST(c.userId AS UNSIGNED) AS user_id,
+               c.businessId AS merchant_id,
+               c.foodId AS food_id,
+               f.foodName AS food_name,
+               f.foodPrice AS food_price,
+               f.foodImg AS food_image_url,
+               c.quantity AS quantity,
+               1 AS checked
+        FROM cart c
+        JOIN food f ON f.foodId = c.foodId
+        WHERE c.cartId = #{itemId} AND c.userId = CAST(#{userId} AS CHAR)
+        LIMIT 1
+    </select>
+
+    <insert id="insert" parameterType="com.eleme.cart.model.CartItemDO">
+        INSERT INTO cart (foodId, businessId, userId, quantity)
+        VALUES (#{foodId}, #{merchantId}, CAST(#{userId} AS CHAR), #{quantity})
+    </insert>
+
+    <update id="update" parameterType="com.eleme.cart.model.CartItemDO">
+        UPDATE cart
+        SET quantity = #{quantity}
+        WHERE cartId = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM cart
+        WHERE cartId = #{itemId} AND userId = CAST(#{userId} AS CHAR)
+    </delete>
+
+    <delete id="deleteByMerchant">
+        DELETE FROM cart
+        WHERE userId = CAST(#{userId} AS CHAR) AND businessId = #{merchantId}
+    </delete>
+</mapper>

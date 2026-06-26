@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eleme.merchant.mapper.FoodMapper">
+
+    <resultMap id="FoodResultMap" type="com.eleme.merchant.model.FoodDO">
+        <id property="id" column="id"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="price" column="price"/>
+        <result property="originPrice" column="origin_price"/>
+        <result property="imageUrl" column="image_url"/>
+        <result property="sales" column="sales"/>
+        <result property="sortNo" column="sort_no"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="selectByMerchantId" resultMap="FoodResultMap">
+        SELECT foodId AS id,
+               businessId AS merchant_id,
+               foodName AS name,
+               foodExplain AS description,
+               foodPrice AS price,
+               NULL AS origin_price,
+               foodImg AS image_url,
+               0 AS sales,
+               foodId AS sort_no,
+               'ACTIVE' AS status
+        FROM food
+        WHERE businessId = #{merchantId}
+        ORDER BY foodId ASC
+    </select>
+</mapper>

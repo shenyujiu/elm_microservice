@@ -1,0 +1,10 @@
+com\eleme\merchant\model\CategoryDO.class
+com\eleme\merchant\MerchantServiceApplication.class
+com\eleme\merchant\mapper\MerchantMapper.class
+com\eleme\merchant\model\FoodDO.class
+com\eleme\merchant\model\MerchantDO.class
+com\eleme\merchant\controller\MerchantController.class
+com\eleme\merchant\service\MerchantService.class
+com\eleme\merchant\mapper\FoodMapper.class
+com\eleme\merchant\service\MerchantService$1.class
+com\eleme\merchant\mapper\CategoryMapper.class

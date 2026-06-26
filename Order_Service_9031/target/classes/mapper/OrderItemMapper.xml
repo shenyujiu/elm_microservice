@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eleme.order.mapper.OrderItemMapper">
+
+    <resultMap id="OrderItemResultMap" type="com.eleme.order.model.OrderItemDO">
+        <id property="id" column="id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="foodId" column="food_id"/>
+        <result property="foodName" column="food_name"/>
+        <result property="foodPrice" column="food_price"/>
+        <result property="quantity" column="quantity"/>
+        <result property="amount" column="amount"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.eleme.order.model.OrderItemDO" useGeneratedKeys="true" keyProperty="id" keyColumn="odId">
+        INSERT INTO orderdetailet (orderId, foodId, quantity)
+        VALUES (#{orderId}, #{foodId}, #{quantity})
+    </insert>
+
+    <select id="selectByOrderId" resultMap="OrderItemResultMap">
+        SELECT d.odId AS id,
+               d.orderId AS order_id,
+               d.foodId AS food_id,
+               f.foodName AS food_name,
+               f.foodPrice AS food_price,
+               d.quantity AS quantity,
+               (f.foodPrice * d.quantity) AS amount
+        FROM orderdetailet d
+        JOIN food f ON f.foodId = d.foodId
+        WHERE d.orderId = #{orderId}
+        ORDER BY d.odId ASC
+    </select>
+</mapper>

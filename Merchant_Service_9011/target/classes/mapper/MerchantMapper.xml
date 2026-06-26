@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eleme.merchant.mapper.MerchantMapper">
+
+    <resultMap id="MerchantResultMap" type="com.eleme.merchant.model.MerchantDO">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="coverUrl" column="cover_url"/>
+        <result property="rating" column="rating"/>
+        <result property="monthlySales" column="monthly_sales"/>
+        <result property="deliveryFee" column="delivery_fee"/>
+        <result property="startPrice" column="start_price"/>
+        <result property="distanceKm" column="distance_km"/>
+        <result property="deliveryTimeMin" column="delivery_time_min"/>
+        <result property="announcement" column="announcement"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="selectByCondition" resultMap="MerchantResultMap">
+        SELECT businessId AS id,
+               businessName AS name,
+               orderTypeId AS category_id,
+               businessImg AS cover_url,
+               4.9 AS rating,
+               300 AS monthly_sales,
+               deliveryPrice AS delivery_fee,
+               starPrice AS start_price,
+               3.2 AS distance_km,
+               30 AS delivery_time_min,
+               businessExplain AS announcement,
+               'ACTIVE' AS status
+        FROM business
+        <where>
+            <if test="categoryId != null">
+                orderTypeId = #{categoryId}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND businessName LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectById" resultMap="MerchantResultMap">
+        SELECT businessId AS id,
+               businessName AS name,
+               orderTypeId AS category_id,
+               businessImg AS cover_url,
+               4.9 AS rating,
+               300 AS monthly_sales,
+               deliveryPrice AS delivery_fee,
+               starPrice AS start_price,
+               3.2 AS distance_km,
+               30 AS delivery_time_min,
+               businessExplain AS announcement,
+               'ACTIVE' AS status
+        FROM business
+        WHERE businessId = #{merchantId}
+        LIMIT 1
+    </select>
+</mapper>

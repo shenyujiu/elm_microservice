@@ -1,0 +1,2 @@
+com\eleme\gateway\filter\AuthAndTraceFilter.class
+com\eleme\gateway\GatewayServiceApplication.class

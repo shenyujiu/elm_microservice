@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eleme.user.mapper.UserMapper">
+
+    <resultMap id="UserResultMap" type="com.eleme.user.model.UserDO">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="nickname" column="nickname"/>
+        <result property="gender" column="gender"/>
+        <result property="avatar" column="avatar"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="selectByUsername" resultMap="UserResultMap">
+        SELECT CAST(userId AS UNSIGNED) AS id,
+               userId AS username,
+               password,
+               userId AS phone,
+               userName AS nickname,
+               IF(userSex = 1, '男', '女') AS gender,
+               userImg AS avatar,
+               IF(delTag = 1, 'ACTIVE', 'DELETED') AS status
+        FROM `user`
+        WHERE userId = #{username}
+        LIMIT 1
+    </select>
+
+    <select id="selectById" resultMap="UserResultMap">
+        SELECT CAST(userId AS UNSIGNED) AS id,
+               userId AS username,
+               password,
+               userId AS phone,
+               userName AS nickname,
+               IF(userSex = 1, '男', '女') AS gender,
+               userImg AS avatar,
+               IF(delTag = 1, 'ACTIVE', 'DELETED') AS status
+        FROM `user`
+        WHERE userId = CAST(#{id} AS CHAR)
+        LIMIT 1
+    </select>
+
+    <insert id="insert" parameterType="com.eleme.user.model.UserDO">
+        INSERT INTO `user` (userId, password, userName, userSex, userImg, delTag)
+        VALUES (#{username}, #{password}, #{nickname}, IF(#{gender} = '女', 0, 1), #{avatar}, 1)
+    </insert>
+</mapper>

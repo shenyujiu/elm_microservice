@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eleme.order.mapper.OrderInfoMapper">
+
+    <resultMap id="OrderInfoResultMap" type="com.eleme.order.model.OrderInfoDO">
+        <id property="id" column="id"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="userId" column="user_id"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="merchantName" column="merchant_name"/>
+        <result property="addressId" column="address_id"/>
+        <result property="goodsAmount" column="goods_amount"/>
+        <result property="deliveryFee" column="delivery_fee"/>
+        <result property="payAmount" column="pay_amount"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+        <result property="orderDate" column="order_date"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="paidAt" column="paid_at"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.eleme.order.model.OrderInfoDO" useGeneratedKeys="true" keyProperty="id" keyColumn="orderId">
+        INSERT INTO orders (userId, businessId, orderDate, orderTotal, daId, orderState)
+        VALUES (CAST(#{userId} AS CHAR), #{merchantId}, #{orderDate}, #{payAmount}, #{addressId}, IF(#{status} = 'PAID', 1, 0))
+    </insert>
+
+    <select id="selectById" resultMap="OrderInfoResultMap">
+        SELECT o.orderId AS id,
+               CONCAT('NO', o.orderId) AS order_no,
+               CAST(o.userId AS UNSIGNED) AS user_id,
+               o.businessId AS merchant_id,
+               b.businessName AS merchant_name,
+               o.daId AS address_id,
+               (o.orderTotal - b.deliveryPrice) AS goods_amount,
+               b.deliveryPrice AS delivery_fee,
+               o.orderTotal AS pay_amount,
+               IF(o.orderState = 1, 'PAID', 'UNPAID') AS status,
+               NULL AS remark,
+               o.orderDate AS order_date,
+               STR_TO_DATE(o.orderDate, '%Y-%m-%d %H:%i:%s') AS created_at,
+               NULL AS paid_at
+        FROM orders o
+        JOIN business b ON b.businessId = o.businessId
+        WHERE o.orderId = #{orderId}
+        LIMIT 1
+    </select>
+
+    <select id="selectByUserId" resultMap="OrderInfoResultMap">
+        SELECT o.orderId AS id,
+               CONCAT('NO', o.orderId) AS order_no,
+               CAST(o.userId AS UNSIGNED) AS user_id,
+               o.businessId AS merchant_id,
+               b.businessName AS merchant_name,
+               o.daId AS address_id,
+               (o.orderTotal - b.deliveryPrice) AS goods_amount,
+               b.deliveryPrice AS delivery_fee,
+               o.orderTotal AS pay_amount,
+               IF(o.orderState = 1, 'PAID', 'UNPAID') AS status,
+               NULL AS remark,
+               o.orderDate AS order_date,
+               STR_TO_DATE(o.orderDate, '%Y-%m-%d %H:%i:%s') AS created_at,
+               NULL AS paid_at
+        FROM orders o
+        JOIN business b ON b.businessId = o.businessId
+        WHERE o.userId = CAST(#{userId} AS CHAR)
+        ORDER BY o.orderId DESC
+    </select>
+
+    <update id="updatePayStatus">
+        UPDATE orders
+        SET orderState = IF(#{status} = 'PAID', 1, 0)
+        WHERE orderId = #{orderId}
+    </update>
+</mapper>

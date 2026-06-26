@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eleme.user.mapper.UserTokenMapper">
+
+    <resultMap id="UserTokenResultMap" type="com.eleme.user.model.UserTokenDO">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="token" column="token"/>
+        <result property="expiredAt" column="expired_at"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.eleme.user.model.UserTokenDO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user_token (user_id, token, expired_at)
+        VALUES (#{userId}, #{token}, #{expiredAt})
+    </insert>
+
+    <select id="selectByToken" resultMap="UserTokenResultMap">
+        SELECT id, user_id, token, expired_at
+        FROM user_token
+        WHERE token = #{token}
+        LIMIT 1
+    </select>
+</mapper>
